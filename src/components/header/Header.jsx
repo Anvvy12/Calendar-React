@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './header.scss';
+import "./header.scss";
 
 const Header = () => {
   return (
@@ -10,10 +10,16 @@ const Header = () => {
       </button>
       <div className="navigation">
         <button className="navigation__today-btn button">Today</button>
-        <button className="icon-button navigation__nav-icon">
+        <button
+          className="icon-button navigation__nav-icon"
+          onClick={() => alert("go Fuck left")}
+        >
           <i className="fas fa-chevron-left"></i>
         </button>
-        <button className="icon-button navigation__nav-icon">
+        <button
+          className="icon-button navigation__nav-icon"
+          onClick={() => alert("go Fuck rigth")}
+        >
           <i className="fas fa-chevron-right"></i>
         </button>
         <span className="navigation__displayed-month"></span>
