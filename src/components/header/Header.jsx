@@ -2,7 +2,7 @@ import React from "react";
 
 import "./header.scss";
 
-const Header = () => {
+const Header = ({ afterActualWeek, beforeActualWeek }) => {
   return (
     <header className="header">
       <button className="button create-event-btn">
@@ -12,13 +12,13 @@ const Header = () => {
         <button className="navigation__today-btn button">Today</button>
         <button
           className="icon-button navigation__nav-icon"
-          onClick={() => alert("go Fuck left")}
+          onClick={beforeActualWeek}
         >
           <i className="fas fa-chevron-left"></i>
         </button>
         <button
           className="icon-button navigation__nav-icon"
-          onClick={() => alert("go Fuck rigth")}
+          onClick={afterActualWeek}
         >
           <i className="fas fa-chevron-right"></i>
         </button>
