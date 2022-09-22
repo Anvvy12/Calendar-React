@@ -10,26 +10,29 @@ import "./common.scss";
 const App = () => {
   const today = new Date();
 
-  const [actualDay, setNewWeek] = useState(
+  const [firstDayInWeek, setNewWeek] = useState(
     new Date(today.setDate(today.getDate()))
   );
 
-  const a = () => {
-    const firsDayOfWeek = months[getWeekStartDate(actualDay).getMonth()];
-    const lastDayOfWeek =
-      months[generateWeekRange(getWeekStartDate(actualDay))[6].getMonth()];
-    let res = firsDayOfWeek;
-    if (firsDayOfWeek !== lastDayOfWeek) {
-      res += " - " + lastDayOfWeek;
+  const [actualMonth, setActualMonth] = useState(
+    months[getWeekStartDate(firstDayInWeek).getMonth()]
+  );
+
+  const showActualMonth = () => {
+    const nextMonth =
+      months[generateWeekRange(getWeekStartDate(firstDayInWeek))[6].getMonth()];
+    let res = actualMonth;
+    if (actualMonth !== nextMonth) {
+      res = `${actualMonth} - ${nextMonth}`;
     }
     return res;
   };
 
   const ShowWeekAfterActual = () =>
-    setNewWeek(new Date(actualDay.setDate(actualDay.getDate() + 7)));
+    setNewWeek(new Date(firstDayInWeek.setDate(firstDayInWeek.getDate() + 7)));
 
   const ShowWeekBeforeActual = () =>
-    setNewWeek(new Date(actualDay.setDate(actualDay.getDate() - 7)));
+    setNewWeek(new Date(firstDayInWeek.setDate(firstDayInWeek.getDate() - 7)));
 
   const showActualWeek = () => {
     setNewWeek(new Date(today.setDate(today.getDate())));
@@ -41,9 +44,11 @@ const App = () => {
         afterActualWeek={ShowWeekAfterActual}
         beforeActualWeek={ShowWeekBeforeActual}
         showActualWeek={showActualWeek}
-        a={a}
+        showActualMonth={showActualMonth}
       />
-      <Calendar weekDates={generateWeekRange(getWeekStartDate(actualDay))} />
+      <Calendar
+        weekDates={generateWeekRange(getWeekStartDate(firstDayInWeek))}
+      />
     </>
   );
 };

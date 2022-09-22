@@ -1,7 +1,12 @@
 import React from "react";
 import "./header.scss";
 
-const Header = ({ afterActualWeek, beforeActualWeek, showActualWeek, a }) => {
+const Header = ({
+  afterActualWeek,
+  beforeActualWeek,
+  showActualWeek,
+  showActualMonth,
+}) => {
   return (
     <header className="header">
       <button className="button create-event-btn">
@@ -26,7 +31,7 @@ const Header = ({ afterActualWeek, beforeActualWeek, showActualWeek, a }) => {
         >
           <i className="fas fa-chevron-right"></i>
         </button>
-        <span className="navigation__displayed-month">{a()}</span>
+        <span className="navigation__displayed-month">{showActualMonth()}</span>
       </div>
     </header>
   );
