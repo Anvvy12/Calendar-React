@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/header/Header.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
-import CreateTask from "./components/createTask/CreateTask.jsx";
+import CreateTaskForm from "./components/createTask/CreateTaskForm.jsx";
 import { months } from "./utils/dateUtils";
 
 import { getWeekStartDate, generateWeekRange } from "../src/utils/dateUtils.js";
@@ -30,7 +30,7 @@ const App = () => {
   };
 
   const showCreateTask = () => {
-    <CreateTask />;
+    <CreateTaskForm />;
   };
 
   const ShowWeekAfterActual = () =>
@@ -45,7 +45,7 @@ const App = () => {
 
   return (
     <>
-      <CreateTask />
+      <CreateTaskForm />
       <Header
         afterActualWeek={ShowWeekAfterActual}
         beforeActualWeek={ShowWeekBeforeActual}

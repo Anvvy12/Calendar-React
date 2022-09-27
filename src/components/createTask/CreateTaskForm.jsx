@@ -1,21 +1,23 @@
 import React from "react";
-import "./CreateTask.scss";
+import "./createTaskForm.scss";
 
-const CreateTask = () => {
+const CreateTaskForm = () => {
   return (
     <div className="create-task">
-      <div className="create-task__title">
+      <div className="title">
         <input type="text"></input>
       </div>
-      <div className="create-task__date">
+      <div className="date">
         <input type="date"></input>
+        <input type="time"></input>
         <input type="date"></input>
+        <input type="time"></input>
       </div>
-      <div className="create-task__description">
+      <div className="description">
         <textarea type="text"></textarea>
       </div>
     </div>
   );
 };
 
-export default CreateTask;
+export default CreateTaskForm;
