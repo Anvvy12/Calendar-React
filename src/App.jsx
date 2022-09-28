@@ -29,9 +29,14 @@ const App = () => {
       : `${months[firstMonth]}`;
   };
 
+  const [isWisibleTaskFrom, a] = useState(false);
+
   const showCreateTask = () => {
-    <CreateTaskForm />;
+    a(!isWisibleTaskFrom);
   };
+  // use dispal none next time
+  // do something with render
+  // finished blya create Task form
 
   const ShowWeekAfterActual = () =>
     setNewWeek(new Date(firstDayInWeek.setDate(firstDayInWeek.getDate() + 7)));
@@ -42,22 +47,38 @@ const App = () => {
   const showActualWeek = () => {
     setNewWeek(new Date(today.setDate(today.getDate())));
   };
-
-  return (
-    <>
-      <CreateTaskForm />
-      <Header
-        afterActualWeek={ShowWeekAfterActual}
-        beforeActualWeek={ShowWeekBeforeActual}
-        showActualWeek={showActualWeek}
-        showActualMonth={showActualMonth}
-        showCreateTask={showCreateTask}
-      />
-      <Calendar
-        weekDates={generateWeekRange(getWeekStartDate(firstDayInWeek))}
-      />
-    </>
-  );
+  if (isWisibleTaskFrom) {
+    return (
+      <>
+        <CreateTaskForm showCreateTask={showCreateTask} />
+        <Header
+          afterActualWeek={ShowWeekAfterActual}
+          beforeActualWeek={ShowWeekBeforeActual}
+          showActualWeek={showActualWeek}
+          showActualMonth={showActualMonth}
+          showCreateTask={showCreateTask}
+        />
+        <Calendar
+          weekDates={generateWeekRange(getWeekStartDate(firstDayInWeek))}
+        />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Header
+          afterActualWeek={ShowWeekAfterActual}
+          beforeActualWeek={ShowWeekBeforeActual}
+          showActualWeek={showActualWeek}
+          showActualMonth={showActualMonth}
+          showCreateTask={showCreateTask}
+        />
+        <Calendar
+          weekDates={generateWeekRange(getWeekStartDate(firstDayInWeek))}
+        />
+      </>
+    );
+  }
 };
 
 export default App;
