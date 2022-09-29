@@ -6,11 +6,14 @@ const Header = ({
   beforeActualWeek,
   showActualWeek,
   showActualMonth,
-  showCreateTask,
+  setModalActive,
 }) => {
   return (
     <header className="header">
-      <button className="button create-event-btn" onClick={showCreateTask}>
+      <button
+        className="button create-event-btn"
+        onClick={() => setModalActive(true)}
+      >
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>
       <div className="navigation">

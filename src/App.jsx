@@ -29,11 +29,7 @@ const App = () => {
       : `${months[firstMonth]}`;
   };
 
-  const [isWisibleTaskFrom, isShowing] = useState(false);
-
-  const showCreateTask = () => {
-    isShowing(!isWisibleTaskFrom);
-  };
+  const [modalActive, setModalActive] = useState(false);
 
   // use dispal none next time
   // do something with render
@@ -51,13 +47,16 @@ const App = () => {
 
   return (
     <>
-      <CreateTaskForm showCreateTask={showCreateTask} />
+      <CreateTaskForm
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+      />
       <Header
         afterActualWeek={ShowWeekAfterActual}
         beforeActualWeek={ShowWeekBeforeActual}
         showActualWeek={showActualWeek}
         showActualMonth={showActualMonth}
-        showCreateTask={showCreateTask}
+        setModalActive={setModalActive}
       />
       <Calendar
         weekDates={generateWeekRange(getWeekStartDate(firstDayInWeek))}
