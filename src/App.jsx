@@ -31,9 +31,20 @@ const App = () => {
 
   const [modalActive, setModalActive] = useState(false);
 
-  // use dispal none next time
-  // do something with render
-  // finished blya create Task form
+  const onCreate = (event) => {
+    // setModalActive(false);
+    console.log(event);
+    console.log(event.target);
+    console.log(event.target.value);
+    return event.target.value;
+  };
+
+  const closeModal = () => {
+    setModalActive(false);
+  };
+  const openModal = () => {
+    setModalActive(true);
+  };
 
   const ShowWeekAfterActual = () =>
     setNewWeek(new Date(firstDayInWeek.setDate(firstDayInWeek.getDate() + 7)));
@@ -50,13 +61,15 @@ const App = () => {
       <CreateTaskForm
         modalActive={modalActive}
         setModalActive={setModalActive}
+        onCreate={onCreate}
+        closeModal={closeModal}
       />
       <Header
         afterActualWeek={ShowWeekAfterActual}
         beforeActualWeek={ShowWeekBeforeActual}
         showActualWeek={showActualWeek}
         showActualMonth={showActualMonth}
-        setModalActive={setModalActive}
+        openModal={openModal}
       />
       <Calendar
         weekDates={generateWeekRange(getWeekStartDate(firstDayInWeek))}

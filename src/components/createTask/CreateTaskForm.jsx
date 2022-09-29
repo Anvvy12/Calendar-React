@@ -1,10 +1,13 @@
 import React from "react";
 import "./createTaskForm.scss";
 
-const CreateTaskForm = ({ modalActive, setModalActive }) => {
+const CreateTaskForm = ({ modalActive, closeModal, onCreate }) => {
   return (
-    <div className={modalActive ? "create-task active" : "create-task"}>
-      <i className="exit" onClick={() => setModalActive(false)}>
+    <div
+      className={modalActive ? "create-task active" : "create-task"}
+      onInput={onCreate}
+    >
+      <i className="exit" onClick={closeModal}>
         🞪
       </i>
       <div className="title">
@@ -13,6 +16,7 @@ const CreateTaskForm = ({ modalActive, setModalActive }) => {
           className="title__input"
           maxLength="30"
           minLength="3"
+          value=""
         ></input>
       </div>
       <div className="date">
@@ -27,7 +31,9 @@ const CreateTaskForm = ({ modalActive, setModalActive }) => {
       <div className="description">
         <textarea type="text" className="description__area"></textarea>
       </div>
-      <button className="create-btn button">Save</button>
+      <button className="create-btn button" type="submit" onClick={onCreate}>
+        Save
+      </button>
     </div>
   );
 };
