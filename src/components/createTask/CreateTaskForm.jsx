@@ -2,6 +2,9 @@ import React from "react";
 import "./createTaskForm.scss";
 
 const CreateTaskForm = ({ modalActive, closeModal, onCreate }) => {
+  //show the value in the input area
+  // save the object of event in the array
+  //delete event from array
   return (
     <div
       className={modalActive ? "create-task active" : "create-task"}

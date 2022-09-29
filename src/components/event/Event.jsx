@@ -8,6 +8,10 @@ const Event = ({ height, marginTop, title, time }) => {
     marginTop,
   };
 
+  // add hover state
+  // set onClick event
+  // delete event from array
+
   return (
     <div style={eventStyle} className="event">
       <div className="event__title">{title}</div>
