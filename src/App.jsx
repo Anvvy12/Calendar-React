@@ -33,10 +33,9 @@ const App = () => {
 
   const onCreate = (event) => {
     // setModalActive(false);
-    console.log(event);
-    console.log(event.target);
-    console.log(event.target.value);
-    return event.target.value;
+    // nativeEvent.data
+    console.log(typeof event.target.value);
+    return event.nativeEvent.data;
   };
 
   const closeModal = () => {

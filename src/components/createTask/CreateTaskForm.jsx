@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./createTaskForm.scss";
 
 const CreateTaskForm = ({ modalActive, closeModal, onCreate }) => {
   //show the value in the input area
   // save the object of event in the array
   //delete event from array
+
   return (
     <div
       className={modalActive ? "create-task active" : "create-task"}
@@ -19,7 +20,6 @@ const CreateTaskForm = ({ modalActive, closeModal, onCreate }) => {
           className="title__input"
           maxLength="30"
           minLength="3"
-          value=""
         ></input>
       </div>
       <div className="date">
