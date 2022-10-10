@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./createTaskForm.scss";
 
-const CreateTaskForm = ({ modalActive, closeModal, onCreate }) => {
-  //show the value in the input area
+const CreateTaskForm = ({ modalActive, closeModal }) => {
+  // show the value in the input area
   // save the object of event in the array
-  //delete event from array
-  // const clearInputs = () =>
-  //   setTask({
-  //     title: "",
-  //     date: "",
-  //     startTime: "",
-  //     endTime: "",
-  //     description: "",
-  //   });
-
-  const handleSubmit = () => {
-    event.preventDefault();
+  // delete event from array
+  const clearInputs = () =>
     setTask({
       title: "",
       date: "",
@@ -23,6 +13,10 @@ const CreateTaskForm = ({ modalActive, closeModal, onCreate }) => {
       endTime: "",
       description: "",
     });
+
+  const handleSubmit = () => {
+    event.preventDefault();
+    clearInputs();
     closeModal();
     console.log("++", task, "++");
   };
@@ -41,7 +35,6 @@ const CreateTaskForm = ({ modalActive, closeModal, onCreate }) => {
       ...task,
       [name]: value,
     });
-    console.log(task);
   };
 
   return (
