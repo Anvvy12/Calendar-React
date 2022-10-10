@@ -62,10 +62,15 @@
   }
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
 .create-btn {
   width: 104px;
   height: 40px;
-  margin: auto 25px 25px auto;
+  margin: 30px 22.4px 15px auto;
   color: #fff;
   background-color: rgb(87, 87, 226);
 }

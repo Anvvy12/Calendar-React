@@ -32,9 +32,7 @@ const App = () => {
   const [modalActive, setModalActive] = useState(false);
 
   const onCreate = (event) => {
-    // setModalActive(false);
-    // nativeEvent.data
-    console.log(typeof event.target.value);
+    console.log(event.nativeEvent);
     return event.nativeEvent.data;
   };
 
