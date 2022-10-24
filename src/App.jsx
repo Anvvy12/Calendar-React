@@ -1,97 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import Header from '../components/header/Header';
-import Calendar from '../components/calendar/Calendar';
-import Modal from '../components/modal/Modal';
-import { getTask } from '../gateway/events';
+import React, { useState, useEffect } from "react";
+import Header from "./components/header/Header";
+import Calendar from "./components/calendar/Calendar";
+import Modal from "./components/modal/Modal";
+import { getTask } from "./gateway/events";
 
-import { getWeekStartDate, generateWeekRange, addDays, currentDate } from '../utils/dateUtils';
+import {
+  getWeekStartDate,
+  generateWeekRange,
+  addDays,
+  currentDate,
+} from "./utils/dateUtils";
 
-import './common.scss';
+import "./common.scss";
 
 const App = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    const [weekStartDate, setWeekStartDate] = useState(new Date());
-    
-    const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+  const [weekStartDate, setWeekStartDate] = useState(new Date());
 
-    const [event, setEvents] = useState([]);
+  const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
 
-    useEffect(() => {
-        getTask().then(responce=>{
-            setEvents(responce)
-        })
-    },[]);
+  const [event, setEvents] = useState([]);
 
-    useEffect(() => {
-        getTask().then(responce=>{
-            setEvents(responce)
-        })
-    },[event.length]);
+  useEffect(() => {
+    getTask().then((responce) => {
+      setEvents(responce);
+    });
+  }, []);
 
-    const refreshEvent = (task) => {
-        setEvents([...event,task])
-    };
+  useEffect(() => {
+    getTask().then((responce) => {
+      setEvents(responce);
+    });
+  }, [event.length]);
 
-    const handleOnDelete = () => {
-        getTask().then(responce=>{
-            setEvents(responce)
-        })
-    };
+  const refreshEvent = (task) => {
+    setEvents([...event, task]);
+  };
 
-    const refreshPage = () => {
-        getTask().then(responce => {
-            setEvents(responce)
-        })
-    };
+  const handleOnDelete = () => {
+    getTask().then((responce) => {
+      setEvents(responce);
+    });
+  };
 
-    const goNext = () => {
-        setWeekStartDate(addDays(weekStartDate, + 7));
-    };
+  const refreshPage = () => {
+    getTask().then((responce) => {
+      setEvents(responce);
+    });
+  };
 
-    const goPrev = () => {
-        setWeekStartDate(addDays(weekStartDate, - 7));
-    };
-    
-    const toDay = () => {
-        setWeekStartDate(currentDate());
-    };
+  const goNext = () => {
+    setWeekStartDate(addDays(weekStartDate, +7));
+  };
 
-    const showForm = () => {
-        setIsOpen(true)
-    };
+  const goPrev = () => {
+    setWeekStartDate(addDays(weekStartDate, -7));
+  };
 
-    const hideForm = () => {
-        setIsOpen(false)
-    };
+  const toDay = () => {
+    setWeekStartDate(currentDate());
+  };
 
-    return (
-        <>
-            <Header 
-                showForm={showForm}
-                hideForm={hideForm}
-                weekStartDate={weekStartDate}
-                weekDates={weekDates}
-                goNext={goNext}
-                goPrev={goPrev}
-                toDay={toDay}
-            />
-            
-            <Modal
-                isOpen={isOpen}
-                hideForm={hideForm}
-                refreshEvent={refreshEvent}
-            />
+  const showForm = () => {
+    setIsOpen(true);
+  };
 
-            <Calendar 
-                weekDates={weekDates} 
-                weekStartDate={weekStartDate}
-                events={event}
-                handleOnDelete={handleOnDelete}
-                refreshPage={refreshPage}
-            />
-        </>
-    );
+  const hideForm = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <Header
+        showForm={showForm}
+        hideForm={hideForm}
+        weekStartDate={weekStartDate}
+        weekDates={weekDates}
+        goNext={goNext}
+        goPrev={goPrev}
+        toDay={toDay}
+      />
+
+      <Modal isOpen={isOpen} hideForm={hideForm} refreshEvent={refreshEvent} />
+
+      <Calendar
+        weekDates={weekDates}
+        weekStartDate={weekStartDate}
+        events={event}
+        handleOnDelete={handleOnDelete}
+        refreshPage={refreshPage}
+      />
+    </>
+  );
 };
 
 export default App;
