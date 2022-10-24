@@ -1,78 +1,97 @@
-import React, { useState, useEffect } from "react";
-import Header from "./components/header/Header.jsx";
-import Calendar from "./components/calendar/Calendar.jsx";
-import CreateTaskForm from "./components/createTask/CreateTaskForm.jsx";
-import { months } from "./utils/dateUtils";
+import React, { useState, useEffect } from 'react';
+import Header from '../components/header/Header';
+import Calendar from '../components/calendar/Calendar';
+import Modal from '../components/modal/Modal';
+import { getTask } from '../gateway/events';
 
-import { getWeekStartDate, generateWeekRange } from "../src/utils/dateUtils.js";
+import { getWeekStartDate, generateWeekRange, addDays, currentDate } from '../utils/dateUtils';
 
-import "./common.scss";
+import './common.scss';
 
 const App = () => {
-  const today = new Date();
+    const [isOpen, setIsOpen] = useState(false);
 
-  const [firstDayInWeek, setNewWeek] = useState(
-    new Date(today.setDate(today.getDate()))
-  );
+    const [weekStartDate, setWeekStartDate] = useState(new Date());
+    
+    const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
 
-  const showActualMonth = () => {
-    const firstMonth = generateWeekRange(
-      getWeekStartDate(firstDayInWeek)
-    )[0].getMonth();
+    const [event, setEvents] = useState([]);
 
-    const secondMonth = generateWeekRange(
-      getWeekStartDate(firstDayInWeek)
-    )[6].getMonth();
+    useEffect(() => {
+        getTask().then(responce=>{
+            setEvents(responce)
+        })
+    },[]);
 
-    return months[firstMonth] !== months[secondMonth]
-      ? `${months[firstMonth]} - ${months[secondMonth]}`
-      : `${months[firstMonth]}`;
-  };
+    useEffect(() => {
+        getTask().then(responce=>{
+            setEvents(responce)
+        })
+    },[event.length]);
 
-  const [modalActive, setModalActive] = useState(false);
+    const refreshEvent = (task) => {
+        setEvents([...event,task])
+    };
 
-  const onCreate = (event) => {
-    console.log(event.nativeEvent);
-    return event.nativeEvent.data;
-  };
+    const handleOnDelete = () => {
+        getTask().then(responce=>{
+            setEvents(responce)
+        })
+    };
 
-  const closeModal = () => {
-    setModalActive(false);
-  };
-  const openModal = () => {
-    setModalActive(true);
-  };
+    const refreshPage = () => {
+        getTask().then(responce => {
+            setEvents(responce)
+        })
+    };
 
-  const ShowWeekAfterActual = () =>
-    setNewWeek(new Date(firstDayInWeek.setDate(firstDayInWeek.getDate() + 7)));
+    const goNext = () => {
+        setWeekStartDate(addDays(weekStartDate, + 7));
+    };
 
-  const ShowWeekBeforeActual = () =>
-    setNewWeek(new Date(firstDayInWeek.setDate(firstDayInWeek.getDate() - 7)));
+    const goPrev = () => {
+        setWeekStartDate(addDays(weekStartDate, - 7));
+    };
+    
+    const toDay = () => {
+        setWeekStartDate(currentDate());
+    };
 
-  const showActualWeek = () => {
-    setNewWeek(new Date(today.setDate(today.getDate())));
-  };
+    const showForm = () => {
+        setIsOpen(true)
+    };
 
-  return (
-    <>
-      <CreateTaskForm
-        modalActive={modalActive}
-        setModalActive={setModalActive}
-        onCreate={onCreate}
-        closeModal={closeModal}
-      />
-      <Header
-        afterActualWeek={ShowWeekAfterActual}
-        beforeActualWeek={ShowWeekBeforeActual}
-        showActualWeek={showActualWeek}
-        showActualMonth={showActualMonth}
-        openModal={openModal}
-      />
-      <Calendar
-        weekDates={generateWeekRange(getWeekStartDate(firstDayInWeek))}
-      />
-    </>
-  );
+    const hideForm = () => {
+        setIsOpen(false)
+    };
+
+    return (
+        <>
+            <Header 
+                showForm={showForm}
+                hideForm={hideForm}
+                weekStartDate={weekStartDate}
+                weekDates={weekDates}
+                goNext={goNext}
+                goPrev={goPrev}
+                toDay={toDay}
+            />
+            
+            <Modal
+                isOpen={isOpen}
+                hideForm={hideForm}
+                refreshEvent={refreshEvent}
+            />
+
+            <Calendar 
+                weekDates={weekDates} 
+                weekStartDate={weekStartDate}
+                events={event}
+                handleOnDelete={handleOnDelete}
+                refreshPage={refreshPage}
+            />
+        </>
+    );
 };
 
 export default App;
