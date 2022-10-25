@@ -26,9 +26,20 @@
   border: none;
 }
 
-.hiden {
+.hidden {
   display: none;
 }
 .open {
   display: block;
+}
+
+.delete-event-btn {
+  height: 24px;
+  width: 75px;
+  margin: 15px 0 0 auto;
+  border-radius: 8px;
+}
+
+.div-delete {
+  display: flex;
 }
