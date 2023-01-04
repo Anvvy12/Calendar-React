@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Header from "./components/header/Header";
-import Calendar from "./components/calendar/Calendar";
-import Modal from "./components/modal/Modal";
-import { getTask } from "./gateway/events";
+import React, { useState, useEffect } from 'react';
+import Header from './components/header/Header';
+import Calendar from './components/calendar/Calendar';
+import Modal from './components/modal/Modal';
+import { getTask } from './gateway/events';
 
-import {
-  getWeekStartDate,
-  generateWeekRange,
-  addDays,
-  currentDate,
-} from "./utils/dateUtils";
+import { getWeekStartDate, generateWeekRange, addDays, currentDate } from './utils/dateUtils';
 
-import "./common.scss";
+import './common.scss';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,29 +18,29 @@ const App = () => {
   const [event, setEvents] = useState([]);
 
   useEffect(() => {
-    getTask().then((responce) => {
+    getTask().then(responce => {
       setEvents(responce);
     });
   }, []);
 
   useEffect(() => {
-    getTask().then((responce) => {
+    getTask().then(responce => {
       setEvents(responce);
     });
   }, [event.length]);
 
-  const refreshEvent = (task) => {
+  const refreshEvent = task => {
     setEvents([...event, task]);
   };
 
   const handleOnDelete = () => {
-    getTask().then((responce) => {
+    getTask().then(responce => {
       setEvents(responce);
     });
   };
 
   const refreshPage = () => {
-    getTask().then((responce) => {
+    getTask().then(responce => {
       setEvents(responce);
     });
   };

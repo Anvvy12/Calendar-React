@@ -1,32 +1,32 @@
-const baseUrl = "https://63568b409243cf412f876a72.mockapi.io/tasks";
+const baseUrl = 'https://63568b409243cf412f876a72.mockapi.io/tasks';
 
-export const createNewTask = (taskData) => {
+export const createNewTask = taskData => {
   return fetch(baseUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-type": "application/json",
+      'Content-type': 'application/json',
     },
     body: JSON.stringify(taskData),
-  }).then((response) => {
+  }).then(response => {
     if (!response.ok) {
-      throw new Error("Failed to create new task");
+      throw new Error('Failed to create new task');
     }
   });
 };
 
 export const getTask = () => {
-  return fetch(baseUrl).then((response) => {
+  return fetch(baseUrl).then(response => {
     if (response.ok) {
       return response.json();
     }
-    throw new Error("Failed to fetch task");
+    throw new Error('Failed to fetch task');
   });
 };
 
-export const deleteTask = (id) => {
+export const deleteTask = id => {
   return fetch(`${baseUrl}/${id}`, {
-    method: "DELETE",
-  }).then((response) => {
+    method: 'DELETE',
+  }).then(response => {
     if (!response.ok) {
       throw new Error(" Internal Server Error. Can't display events");
     }
